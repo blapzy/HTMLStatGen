@@ -1,16 +1,24 @@
 from textnode import TextNode, TextType
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
+
+def text_node_to_html_node(text_node):
+    match text_node.text_type:
+        case TextType.TEXT:
+            return LeafNode(None, text_node.text)
+        case TextType.BOLD:
+            return LeafNode("b", text_node.text)
+        case TextType.ITALIC:
+            return LeafNode("i", text_node.text)
+        case TextType.CODE:
+            return LeafNode("code", text_node.text)
+        case TextType.LINK:
+            return LeafNode("a", text_node.text, {"href": f'{text_node.url}'})
+        case TextType.IMAGE:
+            return LeafNode("img", "", {"src": f'{text_node.url}', "alt": f'{text_node.text}'})
+        case _:
+            raise exception('incorrect text type')
 
 def main():
-    testnode = TextNode("hello world", TextType.PLAIN)
-    print(testnode)
-
-    testhtmlnode = HTMLNode("p", "hello world", None, {
-    "href": "https://www.google.com",
-    "target": "_blank",
-    })
-    print(testhtmlnode)
-    print(testhtmlnode.props_to_html())
-    
+    print("hello world")
 
 main()

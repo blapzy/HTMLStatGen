@@ -10,7 +10,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node, node2)
 
     def test_neq(self):
-        node = TextNode("This is plain text", TextType.PLAIN)
+        node = TextNode("This is plain text", TextType.TEXT)
         node2 = TextNode("This is bold text", TextType.BOLD)
         self.assertNotEqual(node, node2)
 
